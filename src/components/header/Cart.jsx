@@ -1,6 +1,6 @@
 import CartIcon from "../../assets/images/icon-cart.svg";
 
-function CartButton() {
+function Cart() {
   return (
     <button>
       <img src={CartIcon} alt="" />
@@ -8,4 +8,4 @@ function CartButton() {
   );
 }
 
-export default CartButton;
+export default Cart;

@@ -11,17 +11,18 @@
 
   /* neutral */
 
-  --color-very-dark-blue: hsl(220, 13%, 13%);
-  --color-dark-grayish-blue: hsl(219, 9%, 45%);
-  --color-grayish-blue: hsl(220, 14%, 75%);
-  --color-light-grayish-blue: hsl(223, 64%, 98%);
+  --color-gray-950: hsl(220, 13%, 13%);
+  --color-gray-500: hsl(219, 9%, 45%);
+  --color-gray-300: #c3cad9;
+  --color-gray-100: #e4e9f2;
+  --color-gray-50: hsl(223, 64%, 98%);
   --color-white: hsl(0, 0%, 100%);
   --color-black: hsl(0, 0%, 0%);
 }
 
 @layer components {
   body {
-    @apply font-kumbh min-h-dvh antialiased bg-white;
+    @apply font-kumbh min-h-dvh antialiased bg-white text-gray-500;
   }
 
   #root {
