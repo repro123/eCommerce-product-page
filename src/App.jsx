@@ -2,28 +2,40 @@ import Header from "./components/header/Header.jsx";
 import CartSvg from "./components/ui/CartSvg.jsx";
 import MinusIcon from "./assets/images/icon-minus.svg";
 import PlusIcon from "./assets/images/icon-plus.svg";
+import NextIcon from "./assets/images/icon-next.svg";
+import PreviousIcon from "./assets/images/icon-previous.svg";
 import { useState } from "react";
+
+import FullImage1 from "./assets/images/image-product-1.jpg";
+import FullImage2 from "./assets/images/image-product-2.jpg";
+import FullImage3 from "./assets/images/image-product-3.jpg";
+import FullImage4 from "./assets/images/image-product-4.jpg";
+
+import ThumbnailImage1 from "./assets/images/image-product-1-thumbnail.jpg";
+import ThumbnailImage2 from "./assets/images/image-product-2-thumbnail.jpg";
+import ThumbnailImage3 from "./assets/images/image-product-3-thumbnail.jpg";
+import ThumbnailImage4 from "./assets/images/image-product-4-thumbnail.jpg";
 
 const productImages = [
   {
     id: 1,
-    thumbnail: "image-product-1-thumbnail.jpg",
-    fullSize: "image-product-1.jpg",
+    thumbnail: ThumbnailImage1,
+    fullSize: FullImage1,
   },
   {
     id: 2,
-    thumbnail: "image-product-2-thumbnail.jpg",
-    fullSize: "image-product-2.jpg",
+    thumbnail: ThumbnailImage2,
+    fullSize: FullImage2,
   },
   {
     id: 3,
-    thumbnail: "image-product-3-thumbnail.jpg",
-    fullSize: "image-product-3.jpg",
+    thumbnail: ThumbnailImage3,
+    fullSize: FullImage3,
   },
   {
     id: 4,
-    thumbnail: "image-product-4-thumbnail.jpg",
-    fullSize: "image-product-4.jpg",
+    thumbnail: ThumbnailImage4,
+    fullSize: FullImage4,
   },
 ];
 
@@ -39,7 +51,10 @@ function App() {
 function Main() {
   return (
     <main>
-      <div className="container mx-auto py-8 px-4 grid lg:grid-cols-2">
+      <div className="md:container mx-auto md:py-8 md:px-4 grid  lg:grid-cols-2 gap-4 lg:gap-12">
+        <div className="lg:hidden">
+          <MobileProductImages />
+        </div>
         <ProductDescription />
       </div>
     </main>
@@ -47,7 +62,48 @@ function Main() {
 }
 
 function MobileProductImages() {
-  return {};
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  function showPrevious() {
+    currentImageIndex === 0
+      ? setCurrentImageIndex(productImages.length - 1)
+      : setCurrentImageIndex((cur) => cur - 1);
+  }
+
+  function showNext() {
+    currentImageIndex + 1 < productImages.length
+      ? setCurrentImageIndex((cur) => cur + 1)
+      : setCurrentImageIndex(0);
+  }
+
+  const classNames =
+    "absolute top-1/2 rounded-full bg-white size-10 grid place-items-center cursor-pointer -translate-y-1/2";
+
+  return (
+    <div className="border h-full relative">
+      <Button
+        onClick={showPrevious}
+        aria-label="Previous Image"
+        className={`${classNames} left-4`}
+      >
+        <img src={PreviousIcon} alt="" />
+      </Button>
+
+      <img
+        src={productImages[currentImageIndex].fullSize}
+        className="max-w-full w-full"
+        loading="lazy"
+      />
+
+      <Button
+        onClick={showNext}
+        aria-label="Next Image"
+        className={classNames + " right-4"}
+      >
+        <img src={NextIcon} alt="" />
+      </Button>
+    </div>
+  );
 }
 
 function ProductDescription() {
@@ -62,7 +118,7 @@ function ProductDescription() {
   }
 
   return (
-    <section>
+    <section className="max-md:px-8 max-md:pb-8">
       <ProductSpecs />
 
       <div className="grid gap-4 md:grid-cols-2 mt-8">
@@ -81,24 +137,30 @@ function ProductDescription() {
 function QuantitySelector({ numberOfItems, onAddOne, onRemoveOne }) {
   return (
     <div className="flex items-center justify-between bg-gray-50 p-3 w-full rounded-lg">
-      <button
+      <Button
         aria-label="remove one"
         className={`${!numberOfItems ? "cursor-not-allowed" : "cursor-pointer"} border p-3 rounded-md`}
-        type="button"
         onClick={onRemoveOne}
       >
         <img src={MinusIcon} alt="" />
-      </button>
+      </Button>
       <span>{numberOfItems}</span>
-      <button
+      <Button
         aria-label="add one"
         className="cursor-pointer border p-3 rounded-md"
-        type="button"
         onClick={onAddOne}
       >
         <img src={PlusIcon} alt="" />
-      </button>
+      </Button>
     </div>
+  );
+}
+
+function Button({ children, type = "button", ...props }) {
+  return (
+    <button type={type} {...props}>
+      {children}
+    </button>
   );
 }
 
