@@ -2,7 +2,7 @@ import CartIcon from "../../assets/images/icon-cart.svg";
 
 function Cart() {
   return (
-    <button>
+    <button className="cursor-pointer">
       <img src={CartIcon} alt="" />
     </button>
   );

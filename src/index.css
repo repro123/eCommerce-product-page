@@ -26,6 +26,6 @@
   }
 
   #root {
-    @apply flex flex-col;
+    @apply flex flex-col min-h-dvh;
   }
 }

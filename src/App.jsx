@@ -1,7 +1,6 @@
 import Header from "./components/header/Header.jsx";
-import CartSvg from "./components/ui/CartSvg.jsx";
-import MinusIcon from "./assets/images/icon-minus.svg";
-import PlusIcon from "./assets/images/icon-plus.svg";
+import ProductDescription from "./components/products/ProductDescription.jsx";
+import Button from "./components/ui/Button.jsx";
 import NextIcon from "./assets/images/icon-next.svg";
 import PreviousIcon from "./assets/images/icon-previous.svg";
 import { useState } from "react";
@@ -40,30 +39,104 @@ const productImages = [
 ];
 
 function App() {
+  const [numberOfItems, setNumberOfItems] = useState(0);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
   return (
     <>
       <Header />
-      <Main />
+      <Main
+        numberOfItems={numberOfItems}
+        setNumberOfItems={setNumberOfItems}
+        currentImageIndex={currentImageIndex}
+        setCurrentImageIndex={setCurrentImageIndex}
+      />
     </>
   );
 }
 
-function Main() {
+function Main({
+  numberOfItems,
+  setNumberOfItems,
+  currentImageIndex,
+  setCurrentImageIndex,
+}) {
   return (
-    <main>
-      <div className="md:container mx-auto md:py-8 md:px-4 grid  lg:grid-cols-2 gap-4 lg:gap-12">
-        <div className="lg:hidden">
-          <MobileProductImages />
+    <main className="grow lg:grid lg:place-items-center">
+      <div className="md:container mx-auto md:py-8 md:px-4 grid  lg:grid-cols-2 gap-4 lg:gap-12 place-items-center">
+        <div className="lg:hidden md:max-lg:rounded-2xl overflow-hidden">
+          <MobileProductImages
+            currentImageIndex={currentImageIndex}
+            setCurrentImageIndex={setCurrentImageIndex}
+          />
         </div>
-        <ProductDescription />
+        <div className="hidden lg:block">
+          <DesktopProductImages
+            currentImageIndex={currentImageIndex}
+            setCurrentImageIndex={setCurrentImageIndex}
+          />
+        </div>
+        <ProductDescription
+          numberOfItems={numberOfItems}
+          setNumberOfItems={setNumberOfItems}
+        />
       </div>
     </main>
   );
 }
 
-function MobileProductImages() {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+function FullImage({ currentImageIndex, className = "" }) {
+  return (
+    <img
+      src={productImages[currentImageIndex].fullSize}
+      className={`max-w-full w-full object-cover ${className}`}
+      loading="lazy"
+    />
+  );
+}
 
+function DesktopProductImages({ currentImageIndex, setCurrentImageIndex }) {
+  return (
+    <div className="grid gap-4 grid-rows-[1fr_auto]">
+      <div>
+        <FullImage
+          className="h-80 rounded-2xl"
+          currentImageIndex={currentImageIndex}
+        />
+      </div>
+
+      <div className="grid grid-cols-4 gap-4">
+        {productImages.map((img, i) => (
+          <Thumbnail
+            img={img.thumbnail}
+            index={i}
+            key={img.id}
+            setCurrentImageIndex={setCurrentImageIndex}
+            currentImageIndex={currentImageIndex}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function Thumbnail({ img, index, currentImageIndex, setCurrentImageIndex }) {
+  function handleSetCurrentImage() {
+    setCurrentImageIndex(index);
+  }
+  return (
+    <Button
+      onClick={handleSetCurrentImage}
+      aria-label={`Show image ${index + 1}`}
+      className={`relative rounded-2xl size-20 cursor-pointer overflow-hidden border-2 border-transparent after:absolute after:inset-0 after:bg-pale-primary/50 after:opacity-0 after:transition-opacity hover:after:opacity-100 focus:after:opacity-100 ${currentImageIndex === index ? "outline-2 outline-primary after:opacity-100  after:bg-pale-primary/50" : ""}`}
+    >
+      <span className=""></span>
+      <img src={img} alt="" />
+    </Button>
+  );
+}
+
+function MobileProductImages({ currentImageIndex, setCurrentImageIndex }) {
   function showPrevious() {
     currentImageIndex === 0
       ? setCurrentImageIndex(productImages.length - 1)
@@ -80,7 +153,7 @@ function MobileProductImages() {
     "absolute top-1/2 rounded-full bg-white size-10 grid place-items-center cursor-pointer -translate-y-1/2";
 
   return (
-    <div className="border h-full relative">
+    <div className="relative">
       <Button
         onClick={showPrevious}
         aria-label="Previous Image"
@@ -89,11 +162,7 @@ function MobileProductImages() {
         <img src={PreviousIcon} alt="" />
       </Button>
 
-      <img
-        src={productImages[currentImageIndex].fullSize}
-        className="max-w-full w-full"
-        loading="lazy"
-      />
+      <FullImage currentImageIndex={currentImageIndex} />
 
       <Button
         onClick={showNext}
@@ -103,98 +172,6 @@ function MobileProductImages() {
         <img src={NextIcon} alt="" />
       </Button>
     </div>
-  );
-}
-
-function ProductDescription() {
-  const [numberOfItems, setNumberOfItems] = useState(0);
-
-  function handleRemoveOne() {
-    numberOfItems && setNumberOfItems((i) => i - 1);
-  }
-
-  function handleAddOne() {
-    setNumberOfItems((i) => i + 1);
-  }
-
-  return (
-    <section className="max-md:px-8 max-md:pb-8">
-      <ProductSpecs />
-
-      <div className="grid gap-4 md:grid-cols-2 mt-8">
-        <QuantitySelector
-          numberOfItems={numberOfItems}
-          onAddOne={handleAddOne}
-          onRemoveOne={handleRemoveOne}
-        />
-
-        <AddToCart />
-      </div>
-    </section>
-  );
-}
-
-function QuantitySelector({ numberOfItems, onAddOne, onRemoveOne }) {
-  return (
-    <div className="flex items-center justify-between bg-gray-50 p-3 w-full rounded-lg">
-      <Button
-        aria-label="remove one"
-        className={`${!numberOfItems ? "cursor-not-allowed" : "cursor-pointer"} border p-3 rounded-md`}
-        onClick={onRemoveOne}
-      >
-        <img src={MinusIcon} alt="" />
-      </Button>
-      <span>{numberOfItems}</span>
-      <Button
-        aria-label="add one"
-        className="cursor-pointer border p-3 rounded-md"
-        onClick={onAddOne}
-      >
-        <img src={PlusIcon} alt="" />
-      </Button>
-    </div>
-  );
-}
-
-function Button({ children, type = "button", ...props }) {
-  return (
-    <button type={type} {...props}>
-      {children}
-    </button>
-  );
-}
-
-function AddToCart() {
-  return (
-    <button className="flex items-center gap-2 justify-center bg-primary cursor-pointer rounded-lg p-3 w-full text-black">
-      <CartSvg />
-      <span>Add to cart</span>
-    </button>
-  );
-}
-
-function ProductSpecs() {
-  return (
-    <>
-      <p className="text-sm uppercase tracking-wider">Sneaker Company</p>
-      <h1 className="text-3xl font-bold mt-4 text-gray-950">
-        Fall Limited Edition Sneakers
-      </h1>
-      <p className="mt-4">
-        These low-profile sneakers are your perfect casual wear companion.
-        Featuring a durable rubber outer sole, they’ll withstand everything the
-        weather can offer.
-      </p>
-      <div className="mt-4 flex gap-4 items-start">
-        <span className="font-bold text-2xl text-gray-950">$125.00</span>{" "}
-        <span className="bg-gray-950 text-white text-sm p-1 rounded-md">
-          50% <span className="sr-only">discount</span>
-        </span>
-      </div>
-      <p>
-        <del className="font-bold">$250.00</del>
-      </p>
-    </>
   );
 }
 
