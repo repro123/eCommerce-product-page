@@ -1,43 +1,12 @@
 import Header from "./components/header/Header.jsx";
 import ProductDescription from "./components/products/ProductDescription.jsx";
 import Button from "./components/ui/Button.jsx";
-import NextIcon from "./assets/images/icon-next.svg";
-import PreviousIcon from "./assets/images/icon-previous.svg";
+import CloseIcon from "./assets/images/icon-close.svg";
+
+import MobileProductImages from "./components/products/MobileProductImages.jsx";
+import DesktopProductImages from "./components/products/DesktopProductImages.jsx";
 import Overlay from "./components/ui/Overlay.jsx";
 import { useState } from "react";
-
-import FullImage1 from "./assets/images/image-product-1.jpg";
-import FullImage2 from "./assets/images/image-product-2.jpg";
-import FullImage3 from "./assets/images/image-product-3.jpg";
-import FullImage4 from "./assets/images/image-product-4.jpg";
-
-import ThumbnailImage1 from "./assets/images/image-product-1-thumbnail.jpg";
-import ThumbnailImage2 from "./assets/images/image-product-2-thumbnail.jpg";
-import ThumbnailImage3 from "./assets/images/image-product-3-thumbnail.jpg";
-import ThumbnailImage4 from "./assets/images/image-product-4-thumbnail.jpg";
-
-const productImages = [
-  {
-    id: 1,
-    thumbnail: ThumbnailImage1,
-    fullSize: FullImage1,
-  },
-  {
-    id: 2,
-    thumbnail: ThumbnailImage2,
-    fullSize: FullImage2,
-  },
-  {
-    id: 3,
-    thumbnail: ThumbnailImage3,
-    fullSize: FullImage3,
-  },
-  {
-    id: 4,
-    thumbnail: ThumbnailImage4,
-    fullSize: FullImage4,
-  },
-];
 
 function App() {
   const [numberOfItems, setNumberOfItems] = useState(0);
@@ -103,22 +72,6 @@ function Main({
   );
 }
 
-function FullImage({
-  currentImageIndex,
-  className = "",
-  handleToggleLightBox = undefined,
-}) {
-  return (
-    <img
-      src={productImages[currentImageIndex].fullSize}
-      alt={`product ${productImages[currentImageIndex].id}`}
-      className={`max-w-full w-full object-cover border border-transparent ${className} ${handleToggleLightBox ? "cursor-pointer hover:border-primary" : ""}`}
-      loading="lazy"
-      onClick={handleToggleLightBox}
-    />
-  );
-}
-
 function LightBox({
   handleToggleLightBox,
   currentImageIndex,
@@ -140,104 +93,16 @@ function LightBox({
             rightBtnClass="right-0 translate-x-1/2"
             leftBtnClass="-translate-x-1/2"
           />
+          <Button
+            className="absolute -top-12 right-4 translate-x-1/2 bg-white size-10 grid place-items-center p-0 rounded-full opacity-75 hover:opacity-100 focus:opacity-100 cursor-pointer border-2 border-transparent hover:border-primary focus:border-primary"
+            aria-label="Close Lightbox"
+            onClick={handleToggleLightBox}
+          >
+            <img src={CloseIcon} alt="Close Lightbox" />
+          </Button>
         </DesktopProductImages>
       </div>
     </>
-  );
-}
-
-function DesktopProductImages({
-  currentImageIndex,
-  setCurrentImageIndex,
-  handleToggleLightBox,
-  className = "",
-  children,
-}) {
-  return (
-    <div className={`grid gap-4 grid-rows-[1fr_auto] ${className}`}>
-      <div>
-        {children || (
-          <FullImage
-            className="h-80 rounded-2xl"
-            currentImageIndex={currentImageIndex}
-            handleToggleLightBox={handleToggleLightBox}
-          />
-        )}
-      </div>
-
-      <div className="grid grid-cols-4 gap-4">
-        {productImages.map((img, i) => (
-          <Thumbnail
-            img={img.thumbnail}
-            index={i}
-            key={img.id}
-            setCurrentImageIndex={setCurrentImageIndex}
-            currentImageIndex={currentImageIndex}
-          />
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function Thumbnail({ img, index, currentImageIndex, setCurrentImageIndex }) {
-  function handleSetCurrentImage() {
-    setCurrentImageIndex(index);
-  }
-  return (
-    <Button
-      onClick={handleSetCurrentImage}
-      aria-label={`Show image ${index + 1}`}
-      className={`relative rounded-2xl size-20 cursor-pointer overflow-hidden border-2 border-transparent after:absolute after:inset-0 after:bg-pale-primary/50 after:opacity-0 after:transition-opacity hover:after:opacity-100 focus:after:opacity-100 ${currentImageIndex === index ? "outline-2 outline-primary after:opacity-100  after:bg-pale-primary/50" : ""}`}
-    >
-      <span className=""></span>
-      <img src={img} alt="" />
-    </Button>
-  );
-}
-
-function MobileProductImages({
-  currentImageIndex,
-  setCurrentImageIndex,
-  className,
-  leftBtnClass,
-  rightBtnClass,
-}) {
-  function showPrevious() {
-    currentImageIndex === 0
-      ? setCurrentImageIndex(productImages.length - 1)
-      : setCurrentImageIndex((cur) => cur - 1);
-  }
-
-  function showNext() {
-    currentImageIndex + 1 < productImages.length
-      ? setCurrentImageIndex((cur) => cur + 1)
-      : setCurrentImageIndex(0);
-  }
-
-  const classNames =
-    "absolute top-1/2 rounded-full bg-white size-10 grid place-items-center cursor-pointer -translate-y-1/2";
-
-  return (
-    <div className="relative">
-      <Button
-        onClick={showPrevious}
-        aria-label="Previous Image"
-        className={`${classNames} ${leftBtnClass}`}
-      >
-        <img src={PreviousIcon} alt="" />
-      </Button>
-
-      <FullImage currentImageIndex={currentImageIndex} className={className} />
-
-      <Button
-        onClick={showNext}
-        aria-label="Next Image"
-        className={`${classNames} ${rightBtnClass}`}
-      >
-        <img src={NextIcon} alt="" />
-      </Button>
-    </div>
   );
 }
 
