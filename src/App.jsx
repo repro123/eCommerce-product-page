@@ -3,6 +3,7 @@ import ProductDescription from "./components/products/ProductDescription.jsx";
 import Button from "./components/ui/Button.jsx";
 import NextIcon from "./assets/images/icon-next.svg";
 import PreviousIcon from "./assets/images/icon-previous.svg";
+import Overlay from "./components/ui/Overlay.jsx";
 import { useState } from "react";
 
 import FullImage1 from "./assets/images/image-product-1.jpg";
@@ -61,6 +62,12 @@ function Main({
   currentImageIndex,
   setCurrentImageIndex,
 }) {
+  const [isLightBoxOpen, setIsLightBoxOpen] = useState(false);
+
+  function handleToggleLightBox() {
+    setIsLightBoxOpen((e) => !e);
+  }
+
   return (
     <main className="grow lg:grid lg:place-items-center">
       <div className="md:container mx-auto md:py-8 md:px-4 grid  lg:grid-cols-2 gap-4 lg:gap-12 place-items-center">
@@ -68,13 +75,24 @@ function Main({
           <MobileProductImages
             currentImageIndex={currentImageIndex}
             setCurrentImageIndex={setCurrentImageIndex}
+            className=""
+            rightBtnClass="right-4"
+            leftBtnClass="left-4"
           />
         </div>
         <div className="hidden lg:block">
           <DesktopProductImages
             currentImageIndex={currentImageIndex}
             setCurrentImageIndex={setCurrentImageIndex}
+            handleToggleLightBox={handleToggleLightBox}
           />
+          {isLightBoxOpen && (
+            <LightBox
+              handleToggleLightBox={handleToggleLightBox}
+              currentImageIndex={currentImageIndex}
+              setCurrentImageIndex={setCurrentImageIndex}
+            />
+          )}
         </div>
         <ProductDescription
           numberOfItems={numberOfItems}
@@ -85,24 +103,66 @@ function Main({
   );
 }
 
-function FullImage({ currentImageIndex, className = "" }) {
+function FullImage({
+  currentImageIndex,
+  className = "",
+  handleToggleLightBox = undefined,
+}) {
   return (
     <img
       src={productImages[currentImageIndex].fullSize}
-      className={`max-w-full w-full object-cover ${className}`}
+      alt={`product ${productImages[currentImageIndex].id}`}
+      className={`max-w-full w-full object-cover border border-transparent ${className} ${handleToggleLightBox ? "cursor-pointer hover:border-primary" : ""}`}
       loading="lazy"
+      onClick={handleToggleLightBox}
     />
   );
 }
 
-function DesktopProductImages({ currentImageIndex, setCurrentImageIndex }) {
+function LightBox({
+  handleToggleLightBox,
+  currentImageIndex,
+  setCurrentImageIndex,
+}) {
   return (
-    <div className="grid gap-4 grid-rows-[1fr_auto]">
-      <div>
-        <FullImage
-          className="h-80 rounded-2xl"
+    <>
+      <Overlay onClose={handleToggleLightBox} />
+      <div className="absolute inset-0  grid place-items-center">
+        <DesktopProductImages
           currentImageIndex={currentImageIndex}
-        />
+          setCurrentImageIndex={setCurrentImageIndex}
+          className="relative z-50"
+        >
+          <MobileProductImages
+            currentImageIndex={currentImageIndex}
+            setCurrentImageIndex={setCurrentImageIndex}
+            className="h-80 rounded-2xl"
+            rightBtnClass="right-0 translate-x-1/2"
+            leftBtnClass="-translate-x-1/2"
+          />
+        </DesktopProductImages>
+      </div>
+    </>
+  );
+}
+
+function DesktopProductImages({
+  currentImageIndex,
+  setCurrentImageIndex,
+  handleToggleLightBox,
+  className = "",
+  children,
+}) {
+  return (
+    <div className={`grid gap-4 grid-rows-[1fr_auto] ${className}`}>
+      <div>
+        {children || (
+          <FullImage
+            className="h-80 rounded-2xl"
+            currentImageIndex={currentImageIndex}
+            handleToggleLightBox={handleToggleLightBox}
+          />
+        )}
       </div>
 
       <div className="grid grid-cols-4 gap-4">
@@ -136,7 +196,13 @@ function Thumbnail({ img, index, currentImageIndex, setCurrentImageIndex }) {
   );
 }
 
-function MobileProductImages({ currentImageIndex, setCurrentImageIndex }) {
+function MobileProductImages({
+  currentImageIndex,
+  setCurrentImageIndex,
+  className,
+  leftBtnClass,
+  rightBtnClass,
+}) {
   function showPrevious() {
     currentImageIndex === 0
       ? setCurrentImageIndex(productImages.length - 1)
@@ -157,17 +223,17 @@ function MobileProductImages({ currentImageIndex, setCurrentImageIndex }) {
       <Button
         onClick={showPrevious}
         aria-label="Previous Image"
-        className={`${classNames} left-4`}
+        className={`${classNames} ${leftBtnClass}`}
       >
         <img src={PreviousIcon} alt="" />
       </Button>
 
-      <FullImage currentImageIndex={currentImageIndex} />
+      <FullImage currentImageIndex={currentImageIndex} className={className} />
 
       <Button
         onClick={showNext}
         aria-label="Next Image"
-        className={classNames + " right-4"}
+        className={`${classNames} ${rightBtnClass}`}
       >
         <img src={NextIcon} alt="" />
       </Button>
