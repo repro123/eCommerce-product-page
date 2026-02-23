@@ -1,8 +1,8 @@
-import Overlay from "../ui/Overlay.jsx";
-import DesktopProductImages from "./DesktopProductImages.jsx";
-import MobileProductImages from "./MobileProductImages.jsx";
-import Button from "../ui/Button.jsx";
-import CloseIcon from "../../assets/images/icon-close.svg";
+import Overlay from "@/components/ui/Overlay.jsx";
+import DesktopProductImages from "@/components/products/DesktopProductImages.jsx";
+import MobileProductImages from "@/components/products/MobileProductImages.jsx";
+import Button from "@/components/ui/Button.jsx";
+import CloseIcon from "@/components/../assets/images/icon-close.svg";
 
 function LightBox({
   handleToggleLightBox,

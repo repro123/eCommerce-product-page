@@ -1,12 +1,12 @@
-import FullImage1 from "../../assets/images/image-product-1.jpg";
-import FullImage2 from "../../assets/images/image-product-2.jpg";
-import FullImage3 from "../../assets/images/image-product-3.jpg";
-import FullImage4 from "../../assets/images/image-product-4.jpg";
+import FullImage1 from "@/assets/images/image-product-1.jpg";
+import FullImage2 from "@/assets/images/image-product-2.jpg";
+import FullImage3 from "@/assets/images/image-product-3.jpg";
+import FullImage4 from "@/assets/images/image-product-4.jpg";
 
-import ThumbnailImage1 from "../../assets/images/image-product-1-thumbnail.jpg";
-import ThumbnailImage2 from "../../assets/images/image-product-2-thumbnail.jpg";
-import ThumbnailImage3 from "../../assets/images/image-product-3-thumbnail.jpg";
-import ThumbnailImage4 from "../../assets/images/image-product-4-thumbnail.jpg";
+import ThumbnailImage1 from "@/assets/images/image-product-1-thumbnail.jpg";
+import ThumbnailImage2 from "@/assets/images/image-product-2-thumbnail.jpg";
+import ThumbnailImage3 from "@/assets/images/image-product-3-thumbnail.jpg";
+import ThumbnailImage4 from "@/assets/images/image-product-4-thumbnail.jpg";
 
 const productImages = [
   {

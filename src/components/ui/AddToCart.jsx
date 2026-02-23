@@ -1,6 +1,6 @@
-import CartSvg from "./CartSvg";
-import Product from "../data/Product.jsx";
-import productImages from "../data/ProductImages.jsx";
+import CartSvg from "@/components/ui/CartSvg";
+import Product from "@/components/data/Product.jsx";
+import productImages from "@/components/data/ProductImages.jsx";
 
 function AddToCart({
   numberOfItems,

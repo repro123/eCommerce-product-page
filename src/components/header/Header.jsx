@@ -1,8 +1,8 @@
-import Logo from "../ui/Logo.jsx";
-import Avatar from "./Avatar.jsx";
-import Cart from "./Cart.jsx";
-import DesktopNav from "./DesktopNav.jsx";
-import HamburgerMenu from "./HamburgerMenu.jsx";
+import Logo from "@/components/ui/Logo.jsx";
+import Avatar from "@/components/header/Avatar.jsx";
+import Cart from "@/components/header/Cart.jsx";
+import DesktopNav from "@/components/header/DesktopNav.jsx";
+import HamburgerMenu from "@/components/header/HamburgerMenu.jsx";
 
 function Header({ cart, CartQuantity, onDelete, onCheckout, showToast }) {
   return (

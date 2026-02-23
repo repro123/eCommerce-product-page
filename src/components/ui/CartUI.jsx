@@ -1,7 +1,7 @@
-import Button from "./Button.jsx";
-import CloseIcon from "../../assets/images/icon-close.svg";
-import CartItem from "./CartItem.jsx";
-import EmptyCart from "./EmptyCart.jsx";
+import Button from "@/components/ui/Button.jsx";
+import CloseIcon from "@/assets/images/icon-close.svg";
+import CartItem from "@/components/ui/CartItem.jsx";
+import EmptyCart from "@/components/ui/EmptyCart.jsx";
 
 function CartUI({ cart, setIsCartOpen, onDelete, onCheckout, showToast }) {
   return (

@@ -1,4 +1,4 @@
-import Button from "../ui/Button.jsx";
+import Button from "@/components/ui/Button.jsx";
 
 function Thumbnail({ img, index, currentImageIndex, setCurrentImageIndex }) {
   function handleSetCurrentImage() {

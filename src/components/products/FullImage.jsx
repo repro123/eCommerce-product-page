@@ -1,4 +1,4 @@
-import productImages from "../data/ProductImages.jsx";
+import productImages from "@/components/data/ProductImages.jsx";
 
 function FullImage({
   currentImageIndex,

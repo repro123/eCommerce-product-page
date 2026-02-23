@@ -1,4 +1,4 @@
-import AvatarIcon from "../../assets/images/image-avatar.png";
+import AvatarIcon from "@/assets/images/image-avatar.png";
 
 function Avatar() {
   return (

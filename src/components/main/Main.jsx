@@ -1,8 +1,8 @@
 import { useState } from "react";
-import MobileProductImages from "../products/MobileProductImages.jsx";
-import DesktopProductImages from "../products/DesktopProductImages.jsx";
-import LightBox from "../products/LightBox.jsx";
-import ProductDescription from "../products/ProductDescription.jsx";
+import MobileProductImages from "@/components/products/MobileProductImages.jsx";
+import DesktopProductImages from "@/components/products/DesktopProductImages.jsx";
+import LightBox from "@/components/products/LightBox.jsx";
+import ProductDescription from "@/components/products/ProductDescription.jsx";
 
 function Main({
   numberOfItems,
@@ -13,7 +13,6 @@ function Main({
   setCurrentImageIndex,
   setCart,
   showToast,
-  onCheckout,
 }) {
   const [isLightBoxOpen, setIsLightBoxOpen] = useState(false);
 

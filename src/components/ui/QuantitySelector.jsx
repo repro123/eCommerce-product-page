@@ -1,6 +1,6 @@
-import MinusIcon from "../../assets/images/icon-minus.svg";
-import PlusIcon from "../../assets/images/icon-plus.svg";
-import Button from "./Button.jsx";
+import MinusIcon from "@/assets/images/icon-minus.svg";
+import PlusIcon from "@/assets/images/icon-plus.svg";
+import Button from "@/components/ui/Button.jsx";
 
 function QuantitySelector({ numberOfItems, onAddOne, onRemoveOne }) {
   return (

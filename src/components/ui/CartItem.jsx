@@ -1,5 +1,5 @@
-import Button from "./Button.jsx";
-import DeleteIcon from "../../assets/images/icon-delete.svg";
+import Button from "@/components/ui/Button.jsx";
+import DeleteIcon from "@/assets/images/icon-delete.svg";
 
 function CartItem({ item, onDelete, onCheckout, setIsCartOpen, showToast }) {
   return (

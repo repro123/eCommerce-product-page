@@ -1,5 +1,5 @@
-import NavLink from "../ui/NavLink.jsx";
-import navLinks from "../data/NavLinks.jsx";
+import NavLink from "@/components/ui/NavLink.jsx";
+import navLinks from "@/components/data/NavLinks.jsx";
 
 function DesktopNav() {
   return (
