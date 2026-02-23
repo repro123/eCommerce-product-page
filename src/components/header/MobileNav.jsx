@@ -1,6 +1,6 @@
-import navLinks from "../data/NavLinks.jsx";
-import NavLink from "../ui/NavLink.jsx";
-import Overlay from "../ui/Overlay.jsx";
+import navLinks from "@/components/data/NavLinks.jsx";
+import NavLink from "@/components/ui/NavLink.jsx";
+import Overlay from "@/components/ui/Overlay.jsx";
 
 function MobileNav({ onCloseNav }) {
   return (

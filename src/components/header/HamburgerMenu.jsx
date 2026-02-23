@@ -1,7 +1,7 @@
 import { useState } from "react";
-import MenuIcon from "../../assets/images/icon-menu.svg";
-import CloseIcon from "../../assets/images/icon-close.svg";
-import MobileNav from "./MobileNav.jsx";
+import MenuIcon from "@/assets/images/icon-menu.svg";
+import CloseIcon from "@/assets/images/icon-close.svg";
+import MobileNav from "@/components/header/MobileNav.jsx";
 
 function HamburgerMenu() {
   const [isExpanded, setIsExpanded] = useState(false);

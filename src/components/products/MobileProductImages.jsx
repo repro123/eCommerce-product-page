@@ -1,8 +1,8 @@
-import NextIcon from "../../assets/images/icon-next.svg";
-import PreviousIcon from "../../assets/images/icon-previous.svg";
-import productImages from "../data/ProductImages.jsx";
-import Button from "../ui/Button.jsx";
-import FullImage from "./FullImage.jsx";
+import NextIcon from "@/assets/images/icon-next.svg";
+import PreviousIcon from "@/assets/images/icon-previous.svg";
+import productImages from "@/components/data/ProductImages.jsx";
+import Button from "@/components/ui/Button.jsx";
+import FullImage from "@/components/products/FullImage.jsx";
 
 function MobileProductImages({
   currentImageIndex,

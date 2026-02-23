@@ -1,7 +1,7 @@
 import { useState } from "react";
-import CartIcon from "../../assets/images/icon-cart.svg";
-import Button from "../ui/Button.jsx";
-import CartUI from "../ui/CartUI.jsx";
+import CartIcon from "@/assets/images/icon-cart.svg";
+import Button from "@/components/ui/Button.jsx";
+import CartUI from "@/components/ui/CartUI.jsx";
 
 function Cart({ cart, CartQuantity, onDelete, onCheckout, showToast }) {
   const [isCartOpen, setIsCartOpen] = useState(false);

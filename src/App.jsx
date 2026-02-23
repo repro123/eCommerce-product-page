@@ -1,7 +1,7 @@
 // import Header from "./components/header/Header.jsx";
 import Header from "@/components/header/Header.jsx";
-import Main from "./components/main/Main.jsx";
-import Toast from "./components/ui/Toast.jsx";
+import Main from "@/components/main/Main.jsx";
+import Toast from "@/components/ui/Toast.jsx";
 import { useState } from "react";
 
 function App() {

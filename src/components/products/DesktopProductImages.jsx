@@ -1,6 +1,6 @@
-import Thumbnail from "./Thumbnail.jsx";
-import productImages from "../data/ProductImages.jsx";
-import FullImage from "./FullImage.jsx";
+import Thumbnail from "@/components/products/Thumbnail.jsx";
+import productImages from "@/components/data/ProductImages.jsx";
+import FullImage from "@/components/products/FullImage.jsx";
 
 function DesktopProductImages({
   currentImageIndex,

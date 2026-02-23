@@ -1,6 +1,6 @@
-import ProductSpecs from "./ProductSpecs.jsx";
-import QuantitySelector from "../ui/QuantitySelector.jsx";
-import AddToCart from "../ui/AddToCart.jsx";
+import ProductSpecs from "@/components/products/ProductSpecs.jsx";
+import QuantitySelector from "@/components/ui/QuantitySelector.jsx";
+import AddToCart from "@/components/ui/AddToCart.jsx";
 
 function ProductDescription({
   numberOfItems,

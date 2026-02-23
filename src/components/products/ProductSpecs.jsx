@@ -1,4 +1,4 @@
-import Product from "../data/Product.jsx";
+import Product from "@/components/data/Product.jsx";
 
 function ProductSpecs() {
   return (
