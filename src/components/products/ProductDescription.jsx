@@ -2,7 +2,13 @@ import ProductSpecs from "./ProductSpecs.jsx";
 import QuantitySelector from "../ui/QuantitySelector.jsx";
 import AddToCart from "../ui/AddToCart.jsx";
 
-function ProductDescription({ numberOfItems, setNumberOfItems }) {
+function ProductDescription({
+  numberOfItems,
+  setNumberOfItems,
+  setCart,
+  setCartQuantity,
+  showToast,
+}) {
   function handleRemoveOne() {
     numberOfItems && setNumberOfItems((i) => i - 1);
   }
@@ -22,7 +28,13 @@ function ProductDescription({ numberOfItems, setNumberOfItems }) {
           onRemoveOne={handleRemoveOne}
         />
 
-        <AddToCart />
+        <AddToCart
+          numberOfItems={numberOfItems}
+          setNumberOfItems={setNumberOfItems}
+          setCart={setCart}
+          setCartQuantity={setCartQuantity}
+          showToast={showToast}
+        />
       </div>
     </section>
   );
