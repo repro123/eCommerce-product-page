@@ -4,7 +4,7 @@ import Cart from "@/components/header/Cart.jsx";
 import DesktopNav from "@/components/header/DesktopNav.jsx";
 import HamburgerMenu from "@/components/header/HamburgerMenu.jsx";
 
-function Header({ cart, CartQuantity, onDelete, onCheckout, showToast }) {
+function Header({ cart,  onDelete, onCheckout, showToast }) {
   return (
     <header className="px-4">
       <div className="container mx-auto flex items-center py-4 justify-between border-b border-gray-300 relative">
@@ -17,7 +17,6 @@ function Header({ cart, CartQuantity, onDelete, onCheckout, showToast }) {
         <div className="flex items-center gap-8">
           <Cart
             cart={cart}
-            CartQuantity={CartQuantity}
             onDelete={onDelete}
             onCheckout={onCheckout}
             showToast={showToast}

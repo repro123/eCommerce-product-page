@@ -54,7 +54,7 @@ This project helped me strengthen several key areas:
 
 **React State Management & Component Structure**
 
-- Managing multiple pieces of state (`cart`, `numberOfItems`, `CartQuantity`, `currentImageIndex`)
+- Managing multiple pieces of state (`cart`, `numberOfItems`, `currentImageIndex`)
 - Passing state and callbacks through a component hierarchy
 - Understanding when to lift state to a parent component vs. keeping it local
 
