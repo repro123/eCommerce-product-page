@@ -1,3 +1,4 @@
+import Button from "@/components/ui/Button.jsx";
 import productImages from "@/components/data/ProductImages.jsx";
 
 function FullImage({
@@ -5,15 +6,26 @@ function FullImage({
   className = "",
   handleToggleLightBox = undefined,
 }) {
-  return (
-    <img
-      src={productImages[currentImageIndex].fullSize}
-      alt={`product ${productImages[currentImageIndex].id}`}
-      className={`max-w-full w-full object-cover border border-transparent ${className} ${handleToggleLightBox ? "cursor-pointer hover:border-primary" : ""}`}
-      loading="lazy"
-      onClick={handleToggleLightBox}
-    />
-  );
+  const src = productImages[currentImageIndex].fullSize;
+  const alt = `product ${productImages[currentImageIndex].id}`;
+  const imgClass = `max-w-full w-full object-cover border border-transparent ${className} ${
+    handleToggleLightBox ? "cursor-pointer hover:border-primary" : ""
+  }`;
+
+  if (handleToggleLightBox) {
+    return (
+      <Button
+        type="button"
+        aria-label="Open image in lightbox"
+        onClick={handleToggleLightBox}
+        className="p-0 bg-transparent border-0 w-full"
+      >
+        <img src={src} alt={alt} className={imgClass} loading="lazy" />
+      </Button>
+    );
+  }
+
+  return <img src={src} alt={alt} className={imgClass} loading="lazy" />;
 }
 
 export default FullImage;

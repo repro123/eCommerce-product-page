@@ -4,17 +4,9 @@ import DesktopProductImages from "@/components/products/DesktopProductImages.jsx
 import LightBox from "@/components/products/LightBox.jsx";
 import ProductDescription from "@/components/products/ProductDescription.jsx";
 
-function Main({
-  numberOfItems,
-  setNumberOfItems,
-  CartQuantity,
-  setCartQuantity,
-  currentImageIndex,
-  setCurrentImageIndex,
-  setCart,
-  showToast,
-}) {
+function Main({ setCart, showToast }) {
   const [isLightBoxOpen, setIsLightBoxOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   function handleToggleLightBox() {
     setIsLightBoxOpen((e) => !e);
@@ -46,14 +38,7 @@ function Main({
             />
           )}
         </div>
-        <ProductDescription
-          numberOfItems={numberOfItems}
-          setNumberOfItems={setNumberOfItems}
-          CartQuantity={CartQuantity}
-          setCartQuantity={setCartQuantity}
-          setCart={setCart}
-          showToast={showToast}
-        />
+        <ProductDescription setCart={setCart} showToast={showToast} />
       </div>
     </main>
   );

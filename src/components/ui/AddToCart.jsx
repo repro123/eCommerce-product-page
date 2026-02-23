@@ -2,13 +2,7 @@ import CartSvg from "@/components/ui/CartSvg";
 import Product from "@/components/data/Product.jsx";
 import productImages from "@/components/data/ProductImages.jsx";
 
-function AddToCart({
-  numberOfItems,
-  setNumberOfItems,
-  setCart,
-  setCartQuantity,
-  showToast,
-}) {
+function AddToCart({ numberOfItems, setNumberOfItems, setCart, showToast }) {
   function handleAddToCart() {
     if (!numberOfItems) return;
 
@@ -18,7 +12,6 @@ function AddToCart({
       thumbnail: productImages[0].thumbnail,
       id: productImages[0].id,
     });
-    setCartQuantity(numberOfItems);
     setNumberOfItems(0);
     showToast && showToast("Added to cart", "success");
   }

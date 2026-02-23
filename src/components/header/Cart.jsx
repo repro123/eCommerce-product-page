@@ -3,7 +3,7 @@ import CartIcon from "@/assets/images/icon-cart.svg";
 import Button from "@/components/ui/Button.jsx";
 import CartUI from "@/components/ui/CartUI.jsx";
 
-function Cart({ cart, CartQuantity, onDelete, onCheckout, showToast }) {
+function Cart({ cart, onDelete, onCheckout, showToast }) {
   const [isCartOpen, setIsCartOpen] = useState(false);
 
   function handleToggleCart() {
@@ -18,9 +18,9 @@ function Cart({ cart, CartQuantity, onDelete, onCheckout, showToast }) {
         aria-label="Toggle cart"
       >
         <img src={CartIcon} alt="" />
-        {CartQuantity > 0 && (
+        {cart && (
           <span className="absolute text-white -top-2 -right-2 bg-primary rounded-full size-4 text-xs">
-            {CartQuantity}
+            {cart.quantity}
           </span>
         )}
       </Button>
